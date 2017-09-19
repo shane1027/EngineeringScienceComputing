@@ -11,7 +11,7 @@ import sys
 import time
 from pprint import pprint
 
-#TODO: ssh into PUG and drop the log in the correct folder, then run as service
+#TODO:	run on PUG, set up pip / requests, and add as a cronjob
 # also add checks to see if a job is larger than a given value and trigger some
 # sort of warning, in a log or in an email
 # move on to making scripts that check the status of the other printers and
@@ -41,9 +41,9 @@ LOGIN_PAYLOAD={'loginType' : 'admin', 'deptid' : '1496', 'password' : '1496533'}
 OUT_DIR='.'
 PUG_SCRIPT=False
 
-if int(time.strftime('%H')) < 12:
+if int(time.strftime('%H')) < 10:
     letter = 'a'
-elif int(time.strftime('%H')) < 3:
+elif int(time.strftime('%H')) < 15:
     letter = 'b'
 else:
     letter = 'c'
@@ -114,8 +114,16 @@ def log_scraper():
     # print(log_response.text)
 
     # save to the appropriate file name
-    with open(FILENAME, 'w') as f:
+    with open(OUT_DIR+'/'+FILENAME, 'a') as f:
         f.write(log_response.text)
+
+# check if the output directory exists... if not, create it
+if (os.path.isdir(OUT_DIR)):
+    print('Output directory {} exists!'.format(OUT_DIR))
+else:
+    print('Output directory {} does not exist!'.format(OUT_DIR))
+    #TODO: create output dir here
+    exit(1)
 
 # Call the scraping function
 log_scraper()
