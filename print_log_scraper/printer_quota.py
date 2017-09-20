@@ -48,16 +48,17 @@ elif int(time.strftime('%H')) < 15:
 else:
     letter = 'c'
 
-FILENAME='pprint.{}s{}.csv'.format(time.strftime("%m%d%y"), letter)
+
+FILENAME="pprint.{0}s{1}.csv".format(time.strftime("%m%d%y"), letter)
 
 
 # Usage function
 
 def usage(status=0):
-    print('''Usage: {} [ -f FILENAME -d OUTPUT_DIRECTORY ]
-    -f FILENAME             Name of the .csv containing print logs (default: {})
-    -d OUTPUT_DIRECTORY     Location to store output log (default: {})
-    -r RUN_SORTING_SCRIPT   True or False, 1 or 0, run PUG sorting script (default: {})'''.format(os.path.basename(sys.argv[0]), FILENAME, OUT_DIR, PUG_SCRIPT))
+    print('''Usage: {0} [ -f FILENAME -d OUTPUT_DIRECTORY ]
+    -f FILENAME             Name of the .csv containing print logs (default: {1})
+    -d OUTPUT_DIRECTORY     Location to store output log (default: {2})
+    -r RUN_SORTING_SCRIPT   True or False, 1 or 0, run PUG sorting script (default: {3})'''.format(os.path.basename(sys.argv[0]), FILENAME, OUT_DIR, PUG_SCRIPT))
     sys.exit(status)
 
 
@@ -119,9 +120,9 @@ def log_scraper():
 
 # check if the output directory exists... if not, create it
 if (os.path.isdir(OUT_DIR)):
-    print('Output directory {} exists!'.format(OUT_DIR))
+    print('Output directory {0} exists!'.format(OUT_DIR))
 else:
-    print('Output directory {} does not exist!'.format(OUT_DIR))
+    print('Output directory {0} does not exist!'.format(OUT_DIR))
     #TODO: create output dir here
     exit(1)
 
@@ -133,7 +134,7 @@ if (PUG_SCRIPT):
     push_pug()
 
 print('Done!')
-print('Print log saved successfully as {}.  PUG script: {}.'.format(FILENAME,
+print('Print log saved successfully as {0}.  PUG script: {1}.'.format(FILENAME,
     PUG_SCRIPT))
 
 
